@@ -33,7 +33,6 @@ defmodule Hangman.Game do
   def accept_move(game, guess, _already_guest) do
     game
     |> Map.put(:used, MapSet.put(game.used, guess))
-    |> Map.put(:turns_left, game.turns_left - 1)
     |> verify_guess(Enum.member?(game.letters, guess))
   end
 
@@ -47,6 +46,7 @@ defmodule Hangman.Game do
 
   def verify_guess(game, _bad_guess) do
     game
+    |> Map.put(:turns_left, game.turns_left - 1)
     |> Map.put(:game_state, :bad_guess)
   end
 

@@ -41,7 +41,7 @@ defmodule GameTest do
     { new_game, _ } = Game.make_move(game, "p")
 
     assert new_game.game_state == :good_guess
-    assert new_game.turns_left == 6
+    assert new_game.turns_left == 7
     assert MapSet.member?(new_game.used, "p")
   end
 
