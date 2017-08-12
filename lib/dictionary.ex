@@ -5,7 +5,8 @@ defmodule Dictionary do
   end
 
   def word_list do
-    "assets/lemario-general-del-espanol.txt"
+    "../assets/lemario-general-del-espanol.txt"
+    |> Path.expand(__DIR__)
     |> File.read!
     |> String.split(~r/\n/)
   end
