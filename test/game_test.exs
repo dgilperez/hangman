@@ -66,18 +66,39 @@ defmodule GameTest do
     assert game.game_state == :already_used
   end
 
-  test "game is lost under a bad guess and no turns left" do
-    game = Game.new_game("pan") |> Map.put(:turns_left, 1)
-    { game, _ } = Game.make_move(game, "x")
-    assert game.game_state == :lost
+  test "won game: state is changed to :won if guess is correct" do
+    moves = [
+      { "p", :good_guess },
+      { "a", :good_guess },
+      { "n", :won },
+    ]
+
+    game = Game.new_game("pan")
+
+    Enum.reduce(moves, game, fn ({ guess, state }, game) ->
+      { game, _ } = Game.make_move(game, guess)
+      assert game.game_state == state
+      game
+    end)
   end
 
-  test "state is changed to :won if guess is correct" do
-    game = Game.new_game("pan")
-    { game, _ } = Game.make_move(game, "p")
-    { game, _ } = Game.make_move(game, "a")
-    { game, _ } = Game.make_move(game, "n")
+  test "lost game: game is lost under a bad guess and no turns left" do
+    moves = [
+      { "t", :bad_guess },
+      { "u", :bad_guess },
+      { "v", :bad_guess },
+      { "w", :bad_guess },
+      { "x", :bad_guess },
+      { "y", :bad_guess },
+      { "z", :lost },
+    ]
 
-    assert game.game_state == :won
+    game = Game.new_game("pan")
+
+    Enum.reduce(moves, game, fn ({ guess, state }, game) ->
+      { game, _ } = Game.make_move(game, guess)
+      assert game.game_state == state
+      game
+    end)
   end
 end
