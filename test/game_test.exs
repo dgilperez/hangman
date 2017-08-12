@@ -28,44 +28,42 @@ defmodule GameTest do
   end
 
   test "turns_left is decremented if guess is incorrect" do
-    game = Game.new_game
-           |> Map.put(:letters, ["p", "a", "n"])
+    game = Game.new_game("pan")
            |> Map.put(:turns_left, 100)
-    { new_game, _ } = Game.make_move(game, "v")
+    { game, _ } = Game.make_move(game, "v")
 
-    assert new_game.turns_left == 99
+    assert game.turns_left == 99
   end
 
   test "guess is recorded if good guess" do
-    game = Game.new_game |> Map.put(:letters, ["p", "a", "n"])
-    { new_game, _ } = Game.make_move(game, "p")
+    game = Game.new_game("pan")
+    { game, _ } = Game.make_move(game, "p")
 
-    assert new_game.game_state == :good_guess
-    assert new_game.turns_left == 7
-    assert MapSet.member?(new_game.used, "p")
+    assert game.game_state == :good_guess
+    assert game.turns_left == 7
+    assert MapSet.member?(game.used, "p")
   end
 
   test "guess is recorded if bad guess" do
-    game = Game.new_game |> Map.put(:letters, ["p", "a", "n"])
-    { new_game, _ } = Game.make_move(game, "x")
+    game = Game.new_game("pan")
+    { game, _ } = Game.make_move(game, "x")
 
-    assert new_game.game_state == :bad_guess
-    assert new_game.turns_left == 6
-    assert MapSet.member?(new_game.used, "x")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 6
+    assert MapSet.member?(game.used, "x")
   end
 
   test "state is changed to :already_used if guess is repeated" do
-    { game, _ } = Game.new_game
-                  |> Map.put(:letters, ["p", "a", "n"])
-                  |> Game.make_move("p")
+    game = Game.new_game("pan")
+    { game, _ } = Game.make_move(game, "p")
 
     assert MapSet.member?(game.used, "p")
     assert game.game_state != :already_used
 
-    { new_game, _ } = Game.make_move(game, "p")
+    { game, _ } = Game.make_move(game, "p")
 
-    assert MapSet.member?(new_game.used, "p")
-    assert new_game.game_state == :already_used
+    assert MapSet.member?(game.used, "p")
+    assert game.game_state == :already_used
   end
 
   test "game is lost if turns_left is 0 or less" do
@@ -78,11 +76,11 @@ defmodule GameTest do
   end
 
   test "state is changed to :won if guess is correct" do
-    game = Game.new_game |> Map.put(:letters, ["p", "a", "n"])
-    { new_game, _ } = Game.make_move(game, "p")
-    { new_game, _ } = Game.make_move(new_game, "a")
-    { new_game, _ } = Game.make_move(new_game, "n")
+    game = Game.new_game("pan")
+    { game, _ } = Game.make_move(game, "p")
+    { game, _ } = Game.make_move(game, "a")
+    { game, _ } = Game.make_move(game, "n")
 
-    assert new_game.game_state == :won
+    assert game.game_state == :won
   end
 end
