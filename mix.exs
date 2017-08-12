@@ -21,7 +21,8 @@ defmodule Hangman.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      { :dictionary, github: 'dgilperez/dictionary' },
+      { :dictionary, github: "dgilperez/dictionary" },
+      { :inflex, "~> 1.8.1" }
       # { :dictionary, path: '../dictionary' },
     ]
   end
