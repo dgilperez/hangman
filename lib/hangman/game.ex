@@ -20,11 +20,6 @@ defmodule Hangman.Game do
     { game, tally(game) }
   end
 
-  def make_move(game = %{ turns_left: turns_left }, _guess) when turns_left <= 0 do
-    new_game = Map.put(game, :game_state, :lost)
-    { new_game, tally(game) }
-  end
-
   def make_move(game, guess) do
     new_game = accept_move(game, guess, MapSet.member?(game.used, guess))
     { new_game, tally(game) }
@@ -46,6 +41,11 @@ defmodule Hangman.Game do
                 |> maybe_won
     game
     |> Map.put(:game_state, new_state)
+  end
+
+  def verify_guess(game = %{ turns_left: 1 }, _bad_guess) do
+    game
+    |> Map.put(:game_state, :lost)
   end
 
   def verify_guess(game, _bad_guess) do

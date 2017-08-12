@@ -66,13 +66,10 @@ defmodule GameTest do
     assert game.game_state == :already_used
   end
 
-  test "game is lost if turns_left is 0 or less" do
-    for turns_left <- [-100, -1, 0] do
-      { game, _ } = Game.new_game
-                    |> Map.put(:turns_left, turns_left)
-                    |> Game.make_move("x")
-      assert game.game_state == :lost
-    end
+  test "game is lost under a bad guess and no turns left" do
+    game = Game.new_game("pan") |> Map.put(:turns_left, 1)
+    { game, _ } = Game.make_move(game, "x")
+    assert game.game_state == :lost
   end
 
   test "state is changed to :won if guess is correct" do
