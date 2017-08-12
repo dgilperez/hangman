@@ -49,9 +49,10 @@ defmodule Hangman.Game do
   end
 
   def verify_guess(game = %{ turns_left: turns_left }, _bad_guess) do
-    game
-    |> Map.put(:turns_left, turns_left - 1)
-    |> Map.put(:game_state, :bad_guess)
+    %{ game |
+       game_state: :bad_guess,
+       turns_left: turns_left - 1
+     }
   end
 
   def maybe_won(_won = true), do: :won
