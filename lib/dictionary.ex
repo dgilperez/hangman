@@ -2,6 +2,8 @@ defmodule Dictionary do
   def random_word do
     word_list()
     |> Enum.random
+    |> String.normalize(:nfd)
+    |> String.replace(~r/[^A-z\s]/u, "")
   end
 
   def word_list do
