@@ -12,6 +12,6 @@ defmodule HangmanTest do
     game = Hangman.new_game |> Map.put(:letters, ["p", "a", "n"])
     tally = %{ game_state: :good_guess, turns_left: 7, letters: ["p", "_", "_"] }
     assert { game, ^tally } = Hangman.make_move(game, "p")
-    assert Hangman.tally(game) == tallyg
+    assert Hangman.tally(game) == tally
   end
 end
