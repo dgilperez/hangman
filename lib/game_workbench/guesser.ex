@@ -42,7 +42,7 @@ defmodule GameWorkbench.Guesser do
   end
 
   def possible_words(word_so_far, letters_used) do
-    words_by_matches_count = Dictionary.word_list(String.length(word_so_far))
+    words_by_matches_count = Dictionary.start(String.length(word_so_far))
     |> Enum.reduce(%{}, fn(word, acc) ->
                          matches_count = String.myers_difference(word_so_far, word)
                                          |> Enum.reduce(0, fn({key, substring}, matches) ->
