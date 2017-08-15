@@ -1,4 +1,5 @@
-%{"dictionary": {:git, "https://github.com/dgilperez/dictionary.git", "f24a299d367496949f2f796b75fe205e1b61853c", []},
+%{"benchfella": {:hex, :benchfella, "0.3.5", "b2122c234117b3f91ed7b43b6e915e19e1ab216971154acd0a80ce0e9b8c05f5", [], [], "hexpm"},
+  "dictionary": {:git, "https://github.com/dgilperez/dictionary.git", "f24a299d367496949f2f796b75fe205e1b61853c", []},
   "hangman": {:git, "https://github.com/dgilperez/hangman.git", "2765c0e8a09a5d2ca89b5f047e23f6d2b8fe9b4c", []},
   "inflex": {:hex, :inflex, "1.8.1", "9fa9684ff1a872eab7415c0be500cc1b7782f28da6ed75423081e75f92831b1c", [], [], "hexpm"},
   "text_client": {:git, "https://github.com/dgilperez/text_client.git", "ad27423e07872e767a4281c4dc0ab2676dc1a295", []}}

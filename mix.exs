@@ -21,6 +21,7 @@ defmodule GameWorkbench.Mixfile do
     [
       # text_client: [github: 'dgilperez/text_client'],
       text_client: [path: '../text_client'],
+      benchfella: "~> 0.3.0",
     ]
   end
 end
