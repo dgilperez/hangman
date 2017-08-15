@@ -27,13 +27,13 @@ defmodule GameWorkbench.Summary do
   end
 
   defp threshold_passed(%{ won_count: won_count, won: won, number_of_games: number_of_games })
-  when won_count / number_of_games > 0.05 do
-    summary_message("--- SOMETHING THERE ---\n", stats_message(won_count, number_of_games), ["\n" | won])
+  when won_count / number_of_games > 0.5 do
+    summary_message("--- WON ---\n", stats_message(won_count, number_of_games), ["\n" | won])
   end
 
   defp threshold_passed(%{ won_count: won_count, won: won, number_of_games: number_of_games })
-  when won_count / number_of_games > 0.5 do
-    summary_message("--- WON ---\n", stats_message(won_count, number_of_games), ["\n" | won])
+  when won_count / number_of_games > 0.05 do
+    summary_message("--- SOMETHING THERE ---\n", stats_message(won_count, number_of_games), ["\n" | won])
   end
 
   defp threshold_passed(%{ won_count: won_count, number_of_games: number_of_games }) do

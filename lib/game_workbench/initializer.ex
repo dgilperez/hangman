@@ -8,7 +8,7 @@ defmodule GameWorkbench.Initializer do
 
   def play_game(number_of_games) when number_of_games > 0 do
     for _game_number <- 1..number_of_games do
-      # IO.puts "Playing game ##{_game_number}"
+      IO.puts "Playing game ##{_game_number}"
       start()
     end
     |> Summary.process_results

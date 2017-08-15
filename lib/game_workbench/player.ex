@@ -10,7 +10,9 @@ defmodule GameWorkbench.Player do
     game |> continue
   end
 
-  def continue(game) do
+  ###############################
+
+  defp continue(game) do
     game
     |> Guesser.guess_move
     |> Mover.make_move
