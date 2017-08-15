@@ -19,7 +19,8 @@ defmodule TextClient.Mixfile do
 
   defp deps do
     [
-      hangman: [github: 'dgilperez/hangman'],
+      # hangman: [github: 'dgilperez/hangman'],
+      hangman: [path: '../hangman'],
     ]
   end
 end
