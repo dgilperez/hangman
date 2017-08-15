@@ -14,13 +14,7 @@ defmodule GameWorkbench.Initializer do
     |> process_results
   end
 
-  #####
-
-  defp process_results(collection) do
-    collection
-    |> IO.inspect
-    |> Enum.group_by(fn { won_or_lost, _ } -> won_or_lost end, fn { _, letters } -> letters end)
-  end
+  #############################################
 
   defp start do
     Hangman.new_game
@@ -32,6 +26,28 @@ defmodule GameWorkbench.Initializer do
     %State{
       game_service: game,
       tally:        Hangman.tally(game),
+    }
+  end
+
+  defp process_results(collection) do
+    collection
+    |> Enum.reduce(%{ won_count: 0, lost_count: 0, won: [], lost: [] },
+         fn({won_or_lost, word}, acc) ->
+           process_result({ won_or_lost, word }, acc)
+         end)
+  end
+
+  defp process_result({ :won, word }, acc) do
+    %{ acc |
+      won_count: acc[:won_count] + 1,
+      won: [ word | acc[:won] ],
+    }
+  end
+
+  defp process_result({ :lost, word }, acc) do
+    %{ acc |
+      lost_count: acc[:lost_count] + 1,
+      lost: [ word | acc[:lost] ],
     }
   end
 end
