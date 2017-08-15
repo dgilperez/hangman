@@ -1,5 +1,5 @@
 defmodule GameWorkbench.Initializer do
-  alias GameWorkbench.Player
+  alias GameWorkbench.{Player, Summary}
   alias TextClient.State
 
   def play_game do
@@ -7,11 +7,11 @@ defmodule GameWorkbench.Initializer do
   end
 
   def play_game(number_of_games) when number_of_games > 0 do
-    for game_number <- 1..number_of_games do
-      IO.puts "Playing game ##{game_number}"
+    for _game_number <- 1..number_of_games do
+      # IO.puts "Playing game ##{_game_number}"
       start()
     end
-    |> process_results
+    |> Summary.process_results
   end
 
   #############################################
@@ -26,28 +26,6 @@ defmodule GameWorkbench.Initializer do
     %State{
       game_service: game,
       tally:        Hangman.tally(game),
-    }
-  end
-
-  defp process_results(collection) do
-    collection
-    |> Enum.reduce(%{ won_count: 0, lost_count: 0, won: [], lost: [] },
-         fn({won_or_lost, word}, acc) ->
-           process_result({ won_or_lost, word }, acc)
-         end)
-  end
-
-  defp process_result({ :won, word }, acc) do
-    %{ acc |
-      won_count: acc[:won_count] + 1,
-      won: [ word | acc[:won] ],
-    }
-  end
-
-  defp process_result({ :lost, word }, acc) do
-    %{ acc |
-      lost_count: acc[:lost_count] + 1,
-      lost: [ word | acc[:lost] ],
     }
   end
 end

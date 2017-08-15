@@ -2,7 +2,7 @@ defmodule GameWorkbench.Player do
   alias TextClient.{Mover, State}
   alias GameWorkbench.Guesser
 
-  def play(game = %State{ tally: %{ game_state: game_state, letters: letters } }) when game_state in [:won, :lost] do
+  def play(%State{ tally: %{ game_state: game_state, letters: letters } }) when game_state in [:won, :lost] do
     { game_state, Enum.join(letters) }
   end
 
