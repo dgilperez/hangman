@@ -13,7 +13,7 @@ defmodule Hangman.Game do
   end
 
   def new_game do
-    new_game(Dictionary.random_word)
+    new_game(Dictionary.random_word(Dictionary.start))
   end
 
   def tally(game) do
