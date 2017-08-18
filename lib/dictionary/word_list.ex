@@ -1,15 +1,19 @@
 defmodule Dictionary.WordList do
+
+  # __MODULE__ has "Elixir.Dictionary.WordList" value
+  @me __MODULE__
+
   def start_link do
-    Agent.start_link(&word_list/0)
+    Agent.start_link(&word_list/0, name: @me)
   end
 
-  def random_word(agent) do
-    Agent.get(agent, &Enum.random/1)
+  def random_word do
+    Agent.get(@me, &Enum.random/1)
     |> normalize_word
   end
 
-  def word_list(agent, word_length) do
-    Agent.get(agent, &(&1))
+  def word_list(word_length) do
+    Agent.get(@me, &(&1))
     |> Enum.reject(&(String.length(&1) != word_length))
     |> Enum.map(&(normalize_word(&1)))
     |> Enum.uniq
