@@ -42,31 +42,38 @@ defmodule GameWorkbench.Guesser do
   end
 
   def possible_words(word_so_far, letters_used) do
-    words_by_matches_count = Dictionary.start(String.length(word_so_far))
-    |> Enum.reduce(%{}, fn(word, acc) ->
-                         matches_count = String.myers_difference(word_so_far, word)
-                                         |> Enum.reduce(0, fn({key, substring}, matches) ->
-                                              cond do
-                                                key == :eq ->
-                                                  matches + String.length(substring)
-                                                true ->
-                                                  matches
-                                              end
-                                            end)
-                         cond do
-                           # all letters already tried, discard
-                           Enum.uniq(String.codepoints(word)) -- letters_used == [] ->
-                             acc
-                           # there is a word with more matches already in the list, discard
-                           Map.has_key?(acc, matches_count + 1) ->
-                             acc
-                           true ->
-                             Map.put(acc, matches_count, Enum.into(Map.get(acc, matches_count) || [], [word]))
-                         end
-                       end)
+    words_by_matches_count = Dictionary.word_list(String.length(word_so_far))
+    |> Enum.reduce(%{}, fn(word, acc) -> check_matches_count_and_accumulate(word, word_so_far, letters_used, acc) end)
 
     max_matches_count = Enum.max(Map.keys(words_by_matches_count))
     words_by_matches_count[max_matches_count]
+  end
+
+  defp check_matches_count_and_accumulate(word, word_so_far, letters_used, acc) do
+    matches_count = compute_matches_count(word, word_so_far)
+    cond do
+      # all letters already tried, discard
+      Enum.uniq(String.codepoints(word)) -- letters_used == [] ->
+        acc
+      # there is a word with more matches already in the list, discard
+      Map.has_key?(acc, matches_count + 1) ->
+        acc
+      true ->
+        Map.put(acc, matches_count, Enum.into(Map.get(acc, matches_count) || [], [word]))
+    end
+  end
+
+  defp compute_matches_count(word, word_so_far) do
+    String.myers_difference(word_so_far, word)
+    |> Enum.reduce(0, fn({ key, substring }, matches) -> sum_myers_difference_match({key, substring}, matches) end)
+  end
+
+  defp sum_myers_difference_match({ :eq, substring }, matches_so_far) do
+    matches_so_far + String.length(substring)
+  end
+
+  defp sum_myers_difference_match({ _key, _substring }, matches_so_far) do
+    matches_so_far
   end
 
   # 26.9 - 27.6% in 1_000 iterations
