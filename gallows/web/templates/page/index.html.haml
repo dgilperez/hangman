@@ -1,5 +1,4 @@
 .jumbotron
   %h2= gettext "Welcome to %{name}", name: "Hangman!"
-  %p.lead= plural_of("egg", 2)
-  %p.lead= plural_of("egg", -12)
-  %p.lead= plural_of("egg", 1)
+  - for { produce, count } <- @produce do
+    %p.lead= plural_of(produce, count)
