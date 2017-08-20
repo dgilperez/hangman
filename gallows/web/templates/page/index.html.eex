@@ -1,0 +1,6 @@
+<div class="jumbotron">
+  <h2><%= gettext "Welcome to %{name}", name: "Hangman!" %></h2>
+  <p class="lead"><%= plural_of("egg", 2) %></p>
+  <p class="lead"><%= plural_of("egg", -12) %></p>
+  <p class="lead"><%= plural_of("egg", 1) %></p>
+</div>
