@@ -1,0 +1,12 @@
+{application,game_workbench,
+             [{applications,[kernel,stdlib,elixir,logger,benchfella,
+                             text_client]},
+              {description,"game_workbench"},
+              {modules,['Elixir.GameWorkbench','Elixir.GameWorkbench.Guesser',
+                        'Elixir.GameWorkbench.Initializer',
+                        'Elixir.GameWorkbench.Player',
+                        'Elixir.GameWorkbench.State',
+                        'Elixir.GameWorkbench.Summary']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {extra_applications,[logger]}]}.

@@ -1,0 +1,4 @@
+duration:1.0;mem stats:false;sys mem stats:false
+module;test;tags;iterations;elapsed
+GameBench	10 plays		1	1898031
+GameBench	100 plays		1	18379789
