@@ -61,8 +61,10 @@ defmodule Hangman.Game do
   end
 
   defp verify_guess(game = %{ turns_left: 1 }, _bad_guess) do
-    game
-    |> Map.put(:game_state, :lost)
+    %{ game |
+      game_state: :lost,
+      turns_left: 0
+    }
   end
 
   defp verify_guess(game = %{ turns_left: turns_left }, _bad_guess) do
