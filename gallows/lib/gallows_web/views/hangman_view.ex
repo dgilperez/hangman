@@ -10,4 +10,7 @@ defmodule GallowsWeb.HangmanView do
   def new_game_button(conn) do
     button("Play a new game", to: hangman_path(conn, :create_game), class: "btn btn-primary")
   end
+
+  def turn(left, target) when target >= left, do: ""
+  def turn(left, target), do: "faint"
 end
