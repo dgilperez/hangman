@@ -1,4 +1,6 @@
 defmodule SocketGallowsWeb.HangmanChannel do
+  require Logger
+
   use Phoenix.Channel
 
   def join("hangman:game", _, socket) do
@@ -11,6 +13,11 @@ defmodule SocketGallowsWeb.HangmanChannel do
     game  = socket.assigns.game
     tally = Hangman.tally(game)
     push(socket, "tally", tally)
+    { :noreply, socket }
+  end
+
+  def handle_in(other_command, _, socket) do
+    Logger.error("ERROR: Unhandled command sent over socket: #{other_command}")
     { :noreply, socket }
   end
 end

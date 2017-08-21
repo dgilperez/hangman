@@ -30,6 +30,4 @@ export default class HangmanSocket {
   fetch_tally() {
     this.channel.push("tally", {})
   }
-
-
 }
