@@ -1,3 +1,5 @@
+= game_state(@tally.game_state)
+
 %h1
   Your luck is written
 
@@ -8,13 +10,16 @@
 
   %p
     Letters used:
-    %b= @tally.letters_used |> Enum.join(", ")
+    %em= @tally.letters_used |> Enum.join(", ")
 
   %p
     Word so far:
     %b= @tally.letters |> Enum.join(" ")
 
-  = form_for(@conn, hangman_path(@conn, :make_move), [ as: :make_move, method: :put ], fn f ->
-    = text_input(f, :guess)
-    = submit("Guess!")
-  - end)
+  - if game_over?(@tally) do
+    = new_game_button(@conn)
+  - else
+    = form_for(@conn, hangman_path(@conn, :make_move), [ as: :make_move, method: :put ], fn f ->
+      = text_input(f, :guess)
+      = submit("Guess!")
+    - end)
