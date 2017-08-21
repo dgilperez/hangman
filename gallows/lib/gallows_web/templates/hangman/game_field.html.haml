@@ -1,0 +1,20 @@
+%h1
+  Your luck is written
+
+.lead
+  %p
+    Turns left:
+    %b= @tally.turns_left
+
+  %p
+    Letters used:
+    %b= @tally.letters_used |> Enum.join(", ")
+
+  %p
+    Word so far:
+    %b= @tally.letters |> Enum.join(" ")
+
+  = form_for(@conn, hangman_path(@conn, :make_move), [ as: :make_move, method: :put ], fn f ->
+    = text_input(f, :guess)
+    = submit("Guess!")
+  - end)

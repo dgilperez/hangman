@@ -3,3 +3,6 @@
     = gettext "Welcome to %{name}!", name: "Hangman"
   %p.lead
     Guess or die madafaka
+    %br
+    %br
+    = button("Create game", to: hangman_path(@conn, :create_game), class: "btn btn-primary")
