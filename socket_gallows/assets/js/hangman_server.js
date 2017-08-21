@@ -32,7 +32,7 @@ export default class HangmanServer {
     this.channel.push("tally", {})
   }
 
-  make_move() {
+  make_move(guess) {
     this.channel.push("make_move", guess)
   }
 
