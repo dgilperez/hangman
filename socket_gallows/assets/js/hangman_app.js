@@ -1,12 +1,12 @@
 import HangmanServer from "./hangman_server"
 
 const RESPONSES = {
-    won:          [ "success", "You Won!" ],
-    lost:         [ "danger",  "You Lost!" ],
-    good_guess:   [ "success", "Good guess!" ],
-    bad_guess:    [ "warning", "Bad guess!" ],
-    already_used: [ "info",    "You already guessed that" ],
-    initializing: [ "info",    "Let's Play!" ]
+    won:          [ "success", "¡Has ganado!" ],
+    lost:         [ "danger",  "¡Oooh! Has perdido ..." ],
+    good_guess:   [ "success", "¡Bien! ¡Has acertado!" ],
+    bad_guess:    [ "warning", "¡Oh - oh! Inténtalo de nuevo ..." ],
+    already_used: [ "info",    "Esa ya la has probado" ],
+    initializing: [ "info",    "¡A jugar!" ]
 }
 
 let view = function(hangman) {
