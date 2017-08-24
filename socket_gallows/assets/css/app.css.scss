@@ -2,7 +2,7 @@
 $color_lochinvar_approx: #388;
 $color_suva_gray_approx: #888;
 $color_mystic_approx: #e8e8f0;
-$color_governor_bay_approx: #33a;
+$color_governor_bay_approx: #666;
 $color_desert_storm_approx: #f8f8f8;
 $color_moon_raker_approx: #d0d0ee;
 $color_pippin_approx: #fedede;
@@ -15,7 +15,8 @@ $color_light_wisteria_50_approx: rgba(190, 169, 212, .5);
 
 //fonts
 $font_0: Gloria Hallelujah;
-$font_1: cursive !important;
+// $font_1: cursive !important;
+$font_1: Arial !important;
 
 body {
   font-family: $font_0, $font_1;
@@ -46,14 +47,16 @@ body {
 
 .guess-buttons {
   margin-top: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  text-transform: uppercase;
 
   button {
     display: inline-block;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 5rem;
+    height: 5rem;
     text-align: center;
+    text-transform: uppercase;
     padding: 0.7rem;
     //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
     border-radius: 50%;
